@@ -6,23 +6,75 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 
+/**
+ *  Clase principal del aplicativo
+ *  Plataformas Moviles I
+ *  Autor: Einer Fabian Aponte Cubides
+ */
 class MainActivity : AppCompatActivity() {
+
+    /**
+     * Variable con el primer numero a operar
+     */
     var numero: Double = 0.0
+
+    /**
+     * Texto que lleva el historico a operar
+     */
     lateinit var textView1: TextView
+
+    /**
+     * Texto donde el usuario observa los numeros digitados y el resultado
+     */
     lateinit var textView2: TextView
+
+    /**
+     * Texto de errores
+     */
     lateinit var textView3: TextView
+
+    /**
+     * Tipo de operacion
+     * 0 -> No corresponde a ningun tipo de operacion
+     * 1 -> Corresponde a la Suma
+     * 2 -> Corresponde a la  Resta
+     * 3 -> Corresponde a la  Multiplicacion
+     * 4 -> Corresponde a la  Divicion
+     */
     var operacion: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /**
+         * Variable que seleccione el boton = de nuestro parte grafica
+         */
         val oprimirResultado: Button = findViewById(R.id.but_resultado)
+
+        /**
+         * Variable que seleccione el boton de eliminar[C] de nuestro parte grafica
+         */
         val oprimirBorrar: Button = findViewById(R.id.but_borrar)
+
+        /**
+         * Variable que seleccione el primir texto nuestro parte grafica
+         */
         textView1 = findViewById(R.id.textView1)
+
+        /**
+         * Variable que seleccione el segundo texto nuestro parte grafica
+         */
         textView2 = findViewById(R.id.textView2)
+
+        /**
+         * Variable que seleccione el tercer texto nuestro parte grafica
+         */
         textView3 = findViewById(R.id.textView)
 
+        /**
+         * Metodo encargado de realizar la operacion, tambien genera el error cuando el divisor es 0
+         */
         oprimirResultado.setOnClickListener{
             var num2 = textView2.text.toString().toDouble()
             var res = 0.0
@@ -45,6 +97,9 @@ class MainActivity : AppCompatActivity() {
             textView1.setText("")
         }
 
+        /**
+         * Metodo encargado de borrar nuestros datos
+         */
         oprimirBorrar.setOnClickListener{
             textView1.setText("")
             textView2.setText("")
@@ -52,6 +107,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Metodo que se encarga de pintar los numeros que diguite el usuario
+     */
     fun oprimirNumero(view: View){
         var numeroDos: String = textView2.text.toString()
         var bandera: Boolean = false;
@@ -83,6 +141,9 @@ class MainActivity : AppCompatActivity() {
         bandera = false;
     }
 
+    /**
+     * Metodo usado luego de que el usuario trate de dividir por 0
+     */
     fun numeroInicialCero(numeroString: String, indicador: String){
         if (numeroString == "0"){
             textView2.setText(indicador)
@@ -92,6 +153,10 @@ class MainActivity : AppCompatActivity() {
             textView3.setText("")
         }
     }
+
+    /**
+     * Metodo encargado de dibujar los signos de la operacion en el historico
+     */
     fun oprimirOperacion(view: View){
         var num2 = textView2.text.toString()
         numero = num2.toString().toDouble()
